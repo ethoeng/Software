@@ -67,7 +67,7 @@ def L_eff(steerer_name):
 def mag_rigidity_Teslameter(beam_energy_eV=20e3, isotope_mass_in_nucleon=8):
     return np.sqrt(2*beam_energy_eV*isotope_mass_in_nucleon*931e6)/3e8
 
-# theta_mag = int(B dz)/mag_rigidity
+# theta_mag = 0.5*int(B dz)/mag_rigidity
 def angle_mag_mrad(HH6_current_A, beam_energy_eV=20e3, isotope_mass_in_nucleon=8):
     """
     Returns dict of divergence w/ keys: 'YCB6','YCB6B','HV6' due to HH6 stray magnetic fields.
@@ -79,7 +79,7 @@ def angle_mag_mrad(HH6_current_A, beam_energy_eV=20e3, isotope_mass_in_nucleon=8
     for name in steerer_names:
         integ_B_dL = current2field(HH6_current_A)*L_eff(name)
 
-        theta_mag_mrad[name] = (integ_B_dL/mag_rigidity_Tm)*1e3
+        theta_mag_mrad[name] = 0.5*(integ_B_dL/mag_rigidity_Tm)*1e3
 
     return theta_mag_mrad 
 
